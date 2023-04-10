@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/InstargramCreator/.vs
+/InstargramCreator/src/InstargramCreator/bin
+/InstargramCreator/src/InstargramCreator/Libs
+/InstargramCreator/src/InstargramCreator/obj
+/InstargramCreator/src/LDPlayerNTC/LDPlayerNTC/.vs/LDPlayerNTC
+/InstargramCreator/src/LDPlayerNTC/LDPlayerNTC/bin/Debug
+/InstargramCreator/src/LDPlayerNTC/LDPlayerNTC/obj
