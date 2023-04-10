@@ -15,14 +15,12 @@ namespace AppAuto.Mission
             try
             {
                 LDController.ClearCaches("index", Index.ToString(), "org.proxydroid");
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Clear Caches");
                 LDController.Delay();
                 LDController.RunApp("index", Index.ToString(), "org.proxydroid");
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Open ProxyDroid ");
+                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Sloving Change Proxy ");
                 LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Host, 120000);
                 LDController.Delay();
                 LDController.InputText("index", Index.ToString(), proxy.Ip);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Import Host: " + proxy.Ip);
                 LDController.Delay();
                 LDController.TapByPercent("index", Index.ToString(), 79.5, 61.4);
                 LDController.Delay();
@@ -35,7 +33,6 @@ namespace AppAuto.Mission
                 LDController.Key("index", Index.ToString(), ADBKeyEvent.KEYCODE_DEL);
                 LDController.Delay();
                 LDController.InputText("index", Index.ToString(), proxy.Port);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Import Port: " + proxy.Port);
                 LDController.Delay();
                 LDController.TapByPercent("index", Index.ToString(), 79.5, 61.4);
                 LDController.Delay();
@@ -43,7 +40,6 @@ namespace AppAuto.Mission
                 {
                     LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Type);
                     LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Sock5);
-                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Click Sock5 ");
                 }
                 if (proxy.User != null)
                 {
@@ -53,13 +49,11 @@ namespace AppAuto.Mission
                     LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.User);
                     LDController.Delay();
                     LDController.InputText("index", Index.ToString(), proxy.User);
-                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Import User: " + proxy.User);
                     LDController.Delay();
                     LDController.TapByPercent("index", Index.ToString(), 79.5, 61.4);
                     LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Password);
                     LDController.Delay();
                     LDController.InputText("index", Index.ToString(), proxy.Pass);
-                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " Import Password: " + proxy.Pass);
                     LDController.Delay();
                     LDController.TapByPercent("index", Index.ToString(), 79.5, 61.4);
                     LDController.Delay();
@@ -68,7 +62,6 @@ namespace AppAuto.Mission
                     LDController.Delay();
                 }
                 LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Switch);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + " LDPlayer " + Index + " On ProxyDroid ");
                 LDController.Delay();
                 if (proxy.User != null)
                 {

@@ -5,10 +5,12 @@ using InstargramCreator.GetProcess;
 using InstargramCreator.Input;
 using InstargramCreator.Mains;
 using InstargramCreator.Models;
+using InstargramCreator.MultiTask;
 using InstargramCreator.Repositories;
 using LDPlayerNTC;
 using Serilog;
 using System.Diagnostics;
+using System.Windows.Documents;
 
 namespace InstargramCreator
 {
@@ -26,7 +28,7 @@ namespace InstargramCreator
         FullName _fullName;
         Users _users;
         private const int WS_SYSMENU = 0x80000;
-        List<MainAutoRun> Devices = new List<MainAutoRun>();
+        List<DeviceInfo> Devices = new List<DeviceInfo>();
         protected override CreateParams CreateParams
         {
             get
@@ -96,127 +98,6 @@ namespace InstargramCreator
                 }
             }
         }
-        private void BeginAuto()
-        {
-            try
-            {
-                GlobalModel.FormThreadAuto = new Thread(Auto);
-                GlobalModel.FormThreadAuto.IsBackground = true;
-                GlobalModel.FormThreadAuto.Start();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("BeginAuto");
-                Log.Error(ex, ex.Message);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + ex.Message);
-            }
-        }
-        private void Auto()
-        {
-            Log.Information("Auto");
-            try
-            {
-                GlobalModel.IsStopAuto = false;
-                while (!GlobalModel.IsStopAuto)
-                {
-                    for (int i = 1; i <= GlobalModel.MaxThreads; i++)
-                    {
-                        if (GlobalModel.createAccount >= GlobalModel.MaxAccount)
-                        {
-                            MessageBox.Show("Accomplished");
-                            GlobalModel.IsStopAuto = true;
-                            break;
-                        }
-                        int indexLD = i;
-                        if (LDController.IsDevice_Running("index", indexLD.ToString()) == false)
-                        {
-                            LDController.Delay(10);
-                            MailInfoModel mail = new MailInfoModel();
-                            if (TextInfoModel.cbCatch == true)
-                            {
-                                mail = GlobalModel.Emails[0];
-                            }
-                            else
-                            {
-                                GetEmail.CheckMailFail(GlobalModel.Emails);
-                                mail = GetEmail.GetMail(GlobalModel.Emails);
-                                if (mail == null)
-                                {
-                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "Run out of Email");
-                                    return;
-                                }
-                                var check = MailKits.CheckLogin(mail.Email, mail.PassMail, mail.Imap, mail.PortImap);
-                                if (check == false)
-                                {
-                                    GlobalModel.ListEmail.Add(mail.Email);
-                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + " LOGIN failed " + mail.Email);
-                                    continue;
-                                }
-                            }
-
-                            Devices[indexLD].SetEmail(mail);
-                            if (RadioInfoModel.radioUrl == true)
-                            {
-                                _proxys.RequsetProxy(TextInfoModel.txtUrl);
-                            }
-                            if (RadioInfoModel.radioNoProxy == false)
-                            {
-                                GetProxys.CheckProxy(GlobalModel.Proxys);
-                                ProxyInfoModel proxyInfoModel = GetProxys.GetProxy();
-                                if (proxyInfoModel == null)
-                                {
-                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "Run out of Proxy");
-                                    return;
-                                }
-                                Devices[indexLD].SetProxy(proxyInfoModel);
-                            }
-                            if (RadioInfoModel.radioUserCustomize == true)
-                            {
-                                UserInfoModel userInfoModel = GetUserName.GetUser();
-                                if (userInfoModel == null)
-                                {
-                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "Run out of UserName");
-                                    return;
-                                }
-                                Devices[indexLD].SetUserName(userInfoModel);
-                            }
-                            if (RadioInfoModel.cbAvatar == true)
-                            {
-                                AvatarInfoModel avatarInfoModel = getAvatar.GetImgAvatar();
-                                lock (GlobalModel.LockAvatar)
-                                {
-                                    if (GlobalModel.Avatar[(GlobalModel.Avatar.Count - 1)].IsRunning == true)
-                                    {
-                                        GlobalModel.Avatar.All(x => x.IsRunning == false);
-                                    }
-                                }
-                                Devices[indexLD].SetImgAvatar(avatarInfoModel);
-                            }
-                            if (RadioInfoModel.cbBio == true)
-                            {
-                                BioInfoModel bioInfoModel = getBio.GetsBio();
-                                lock (GlobalModel.LockBio)
-                                {
-                                    if (GlobalModel.Bio[(GlobalModel.Bio.Count - 1)].IsRunning == true)
-                                    {
-                                        GlobalModel.Bio.All(x => x.IsRunning == false);
-                                    }
-                                }
-                                Devices[indexLD].SetBio(bioInfoModel);
-                            }
-                            Devices[indexLD].BeginAuto();
-
-                        }
-                        LDController.Delay(10);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, ex.Message);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + ex.Message);
-            }
-        }
         private void InitializeSavedValues()
         {
             NumberRun.Value = int.Parse((string)Properties.Settings.Default["NumberRun"]);
@@ -242,6 +123,7 @@ namespace InstargramCreator
         }
         private void Begin()
         {
+            LDPlayers lDPlayers = new LDPlayers(_accountRepository);
             try
             {
                 if ((int)NumberThreads.Value > Devices.Count - 2)
@@ -257,9 +139,8 @@ namespace InstargramCreator
                             {
                                 int i = Devices.Count - 2;
                                 LDController.Copy("LDPlayer " + i, "0");
-                                LDPlayers lDPlayers = new LDPlayers(_accountRepository);
                                 lDPlayers.LoadLdPlayer(Devices);
-                                if ((int)NumberThreads.Value <= Devices.Count - 2)
+                                if ((int)NumberThreads.Value <= Devices.Count - 1)
                                 {
                                     MessageBox.Show("LDPlayer Initialization Success");
                                     break;
@@ -280,7 +161,9 @@ namespace InstargramCreator
                 }
                 TextInfoModel.NumberRequest = RandomStrings.RandomNumber(1, (int)NumberThreads.Value);
                 procces();
-                BeginAuto();
+                lDPlayers.LoadLdPlayer(Devices);
+                MultiTaskManager multiTaskManager = new MultiTaskManager(_accountRepository);
+                multiTaskManager.StartTasks(Devices);
             }
             catch (Exception ex)
             {
@@ -290,6 +173,7 @@ namespace InstargramCreator
         }
         private void procces()
         {
+            GlobalModel.MaxThreads = int.Parse((string)Properties.Settings.Default["numberThreads"]);
             RadioInfoModel.radioNoProxy = (bool)Properties.Settings.Default["radioNoProxy"];
             RadioInfoModel.radioSock5 = (bool)Properties.Settings.Default["radioSock5"];
             RadioInfoModel.radioHTTP = (bool)Properties.Settings.Default["radioHTTP"];
@@ -408,13 +292,13 @@ namespace InstargramCreator
                     {
                         CreateFiles.RemoveFile(GlobalModel.ListAvatar, TextInfoModel.txtAvatar);
                     }
-                    if (GlobalModel.MainThreadAuto != null)
+                    var s = LDController.GetDevices2_Running();
+                    if (s.Count>0)
                     {
                         try
                         {
                             LDController.CloseAll();
-                            GlobalModel.MainThreadAuto.Abort();
-                            GlobalModel.MainThreadAuto = null;
+                            GlobalModel.ResultRun = false;
                         }
                         catch (Exception ex)
                         {
@@ -472,9 +356,10 @@ namespace InstargramCreator
         private void numberThreads_ValueChanged(object sender, EventArgs e)
         {
             int run = (int)((NumericUpDown)sender).Value;
+            GlobalModel.MaxThreads = run;
             Properties.Settings.Default["numberThreads"] = run.ToString();
             Properties.Settings.Default.Save();
-            GlobalModel.MaxThreads = (int)run;
+          
         }
         private void numberRun_ValueChanged(object sender, EventArgs e)
         {

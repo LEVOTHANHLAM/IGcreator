@@ -40,32 +40,32 @@ namespace InstargramCreator
         {
             try
             {
-                HttpHelper httpHelper = new HttpHelper();
-                string hardwareId = httpHelper.GetHardwareId();
-                Constant.licenseKey = txtLicenkey.Text.Trim();
-                var softwareId = Constant.SoftwareId;
-                var checkLicenseResult = await httpHelper.CheckLicense(Constant.licenseKey, hardwareId, softwareId);
-                if (checkLicenseResult.Data is true)
-                {
-                    LDController.pathLDConsole = txtPath.Text + "\\ldconsole.exe";
-                    LDController.pathADB = txtPath.Text + "\\adb.exe";
-                    GlobalModel.SourcePath = txtPath.Text;
-                    GlobalModel.MultiPlayerPath = txtPath.Text + "\\dnmultiplayer.exe";
-                    CreateFiles.CreateFile();
-                    _frmAuto.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show(checkLicenseResult.Message.ToString());
-                    var ps = new ProcessStartInfo("https://qnibot.com/")
-                    {
-                        UseShellExecute = true,
-                        Verb = "open"
-                    };
-                    Process.Start(ps);
-                    Environment.Exit(Environment.ExitCode);
-                }
+                //HttpHelper httpHelper = new HttpHelper();
+                //string hardwareId = httpHelper.GetHardwareId();
+                //Constant.licenseKey = txtLicenkey.Text.Trim();
+                //var softwareId = Constant.SoftwareId;
+                //var checkLicenseResult = await httpHelper.CheckLicense(Constant.licenseKey, hardwareId, softwareId);
+                //if (checkLicenseResult.Data is true)
+                //{
+                LDController.pathLDConsole = txtPath.Text + "\\ldconsole.exe";
+                LDController.pathADB = txtPath.Text + "\\adb.exe";
+                GlobalModel.SourcePath = txtPath.Text;
+                GlobalModel.MultiPlayerPath = txtPath.Text + "\\dnmultiplayer.exe";
+                CreateFiles.CreateFile();
+                _frmAuto.Show();
+                this.Hide();
+                //}
+                //else
+                //{
+                //    MessageBox.Show(checkLicenseResult.Message.ToString());
+                //    var ps = new ProcessStartInfo("https://qnibot.com/")
+                //    {
+                //        UseShellExecute = true,
+                //        Verb = "open"
+                //    };
+                //    Process.Start(ps);
+                //    Environment.Exit(Environment.ExitCode);
+                //}
             }
             catch (Exception ex)
             {

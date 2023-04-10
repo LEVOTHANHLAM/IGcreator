@@ -928,7 +928,6 @@ namespace LDPlayerNTC
                 }
                 if (sw.ElapsedMilliseconds > timeout)
                 {
-                    Close(param, NameOrIndex);
                     sw.Stop();
                     break;
                 }
@@ -960,7 +959,6 @@ namespace LDPlayerNTC
                 }
                 if (sw.ElapsedMilliseconds > timeout)
                 {
-                    Close(param, NameOrIndex);
                     sw.Stop();
                     break;
                 }
@@ -992,7 +990,6 @@ namespace LDPlayerNTC
                 }
                 if (sw.ElapsedMilliseconds > timeout)
                 {
-                    Close(param, NameOrIndex);
                     sw.Stop();
                     break;
                 }
@@ -1024,7 +1021,6 @@ namespace LDPlayerNTC
                 }
                 if (sw.ElapsedMilliseconds > timeout)
                 {
-                    Close(param, NameOrIndex);
                     sw.Stop();
                     break;
                 }
@@ -1055,7 +1051,6 @@ namespace LDPlayerNTC
                 }
                 if (sw.ElapsedMilliseconds > timeout)
                 {
-                    Close(param, NameOrIndex);
                     sw.Stop();
                     break;
                 }

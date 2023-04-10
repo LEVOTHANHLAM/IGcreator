@@ -4,7 +4,7 @@ namespace InstargramCreator.Models
 {
     public static class GlobalModel
     {
-        public static Thread MainThreadAuto;
+        public static bool ResultRun = true;
         public static int MaxThreads { get; set; }
         public static string SourcePath { get; set; }
         public static int MaxAccount { get; set; }
@@ -42,6 +42,7 @@ namespace InstargramCreator.Models
         public static string PathLastNameJsoin = Path.Combine(Environment.CurrentDirectory, "FileJsoin\\lastnames.json");
         public static string PathUserNameJsoin = Path.Combine(Environment.CurrentDirectory, "FileJsoin\\usernames.json");
         public static string PathFullnameVNJsion = Path.Combine(Environment.CurrentDirectory, "FileJsoin\\FirstNameVN.txt");
-
+        public static string PathDevicesXMLFile = Path.Combine(Environment.CurrentDirectory, "Setting\\Android\\Device.xml");
+        public static string PathDevicesJsonFile = Path.Combine(Environment.CurrentDirectory, "Setting\\Android\\DevicesAndroid.json");
     }
 }

@@ -2,6 +2,7 @@
 using InstargramCreator.Files;
 using InstargramCreator.Input;
 using InstargramCreator.Models;
+using InstargramCreator.MultiTask;
 using InstargramCreator.Repositories;
 using LDPlayerNTC;
 using Serilog;
@@ -106,13 +107,14 @@ namespace InstargramCreator.Mission
                             mail.EmailForm = firstName + RandomStrings.RandomAllString(RandomStrings.RandomNumber(4, 10), RandomStrings.Numeric + RandomStrings.LowerCase)+mail.Email;
                             LDController.InputText("index", Index.ToString(), mail.EmailForm);
                             GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Import Email: " + mail.EmailForm);
+                            Log.Information("LDPlayer " + Index + " Import Email: " + mail.EmailForm);
                         }
                         else
                         {
                             LDController.InputText("index", Index.ToString(), mail.Email);
                             GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Import Email: " + mail.Email);
                         }
-                      
+                        Log.Information("LDPlayer " + Index + " Import Email: " + mail.EmailForm);
                         LDController.Delay();
                         LDController.FindImageTap("index", Index.ToString(), ImagesInfoModel.Next);
                         LDController.Delay();
@@ -124,9 +126,9 @@ namespace InstargramCreator.Mission
                         }
                         if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.Next) == true)
                         {
-
                             if (TextInfoModel.cbCatch == true)
                             {
+                                Log.Information("LDPlayer " + Index + " Import Email: " + mail.EmailForm);
                                 LDController.Delay(40,60);
                                 string otp = MailKits.VerifyMail(mail.Email, mail.PassMail, mail.Imap, mail.PortImap, mail.EmailForm, "Instagram");
                                 LDController.Delay();

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstargramCreator", "src\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDPlayerNTC", "src\LDPlayerNTC\LDPlayerNTC\LDPlayerNTC.csproj", "{2A5C3921-6B39-4F32-A589-5D43B8EFE0C3}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstagramCreator", "..\Setup1\Setup1.vdproj", "{049C33EE-F774-4338-90AA-F2351821FF07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{2A5C3921-6B39-4F32-A589-5D43B8EFE0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A5C3921-6B39-4F32-A589-5D43B8EFE0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A5C3921-6B39-4F32-A589-5D43B8EFE0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049C33EE-F774-4338-90AA-F2351821FF07}.Debug|Any CPU.ActiveCfg = Debug
+		{049C33EE-F774-4338-90AA-F2351821FF07}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

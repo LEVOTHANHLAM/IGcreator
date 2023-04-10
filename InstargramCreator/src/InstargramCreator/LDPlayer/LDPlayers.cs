@@ -1,4 +1,6 @@
 ﻿using InstargramCreator.Mains;
+using InstargramCreator.Models;
+using InstargramCreator.MultiTask;
 using InstargramCreator.Repositories;
 
 namespace AppAuto.LDPlayer
@@ -12,7 +14,7 @@ namespace AppAuto.LDPlayer
         {
             _accountRepository = accountRepository;
         }
-        public void LoadLdPlayer(List<MainAutoRun> ListDevices)
+        public void LoadLdPlayer(List<DeviceInfo> ListDevices)
         {
             try
             {
@@ -23,9 +25,14 @@ namespace AppAuto.LDPlayer
                 {
                     if (string.IsNullOrEmpty(deviceitem)) continue;
                     string[] s = deviceitem.Split(',');
-                    MainAutoRun driver = new MainAutoRun(_accountRepository);
+                    DeviceInfo driver = new DeviceInfo();
                     driver.Index = int.Parse(s[0]);
-                    driver.name = s[0];
+                    driver.Email = new MailInfoModel();
+                    driver.Proxy = new ProxyInfoModel();
+                    driver.Avatar = new AvatarInfoModel();  
+                    driver.FullName = new FullNameInfoModel();
+                    driver.User = new UserInfoModel();
+                    driver.Post = new PostInfoModel();
                     ListDevices.Add(driver);
                 }
                 soureLDPlayer.DataSource = ListDevices;

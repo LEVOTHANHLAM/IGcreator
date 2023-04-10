@@ -36,7 +36,7 @@ namespace InstargramCreator.Input
         {
             try
             {
-                Log.Information("VerifyMail " + email + ":" + pass + ":" + imap + ":" + port);
+                Log.Information("VerifyMail " + toEmail + ":" + pass + ":" + imap + ":" + port);
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(imap) && port != null)
                 {
                     using (var client = new ImapClient())
