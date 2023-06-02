@@ -29,6 +29,7 @@ namespace InstargramCreator
         Users _users;
         private const int WS_SYSMENU = 0x80000;
         List<DeviceInfo> Devices = new List<DeviceInfo>();
+        MultiTaskManager _multiTaskManager;
         protected override CreateParams CreateParams
         {
             get
@@ -64,6 +65,7 @@ namespace InstargramCreator
             _fullName = new FullName();
             _users = new Users();
             GlobalModel.FullNames = new List<FullNameInfoModel>();
+            _multiTaskManager = new MultiTaskManager(_accountRepository);
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -126,7 +128,7 @@ namespace InstargramCreator
             LDPlayers lDPlayers = new LDPlayers(_accountRepository);
             try
             {
-                if ((int)NumberThreads.Value > Devices.Count - 2)
+                if ((int)NumberThreads.Value > Devices.Count - 1)
                 {
                     DialogResult thongbao;
                     thongbao = (MessageBox.Show("LDPlayer has not been initialized.\n Do you want to initialize it now?", "Notify", MessageBoxButtons.YesNo, MessageBoxIcon.Warning));
@@ -137,7 +139,7 @@ namespace InstargramCreator
                         {
                             while (true)
                             {
-                                int i = Devices.Count - 2;
+                                int i = Devices.Count - 1;
                                 LDController.Copy("LDPlayer " + i, "0");
                                 lDPlayers.LoadLdPlayer(Devices);
                                 if ((int)NumberThreads.Value <= Devices.Count - 1)
@@ -159,11 +161,10 @@ namespace InstargramCreator
                         return;
                     }
                 }
-                TextInfoModel.NumberRequest = RandomStrings.RandomNumber(1, (int)NumberThreads.Value);
                 procces();
                 lDPlayers.LoadLdPlayer(Devices);
-                MultiTaskManager multiTaskManager = new MultiTaskManager(_accountRepository);
-                multiTaskManager.StartTasks(Devices);
+
+                _multiTaskManager.StartTasks(Devices);
             }
             catch (Exception ex)
             {
@@ -293,7 +294,7 @@ namespace InstargramCreator
                         CreateFiles.RemoveFile(GlobalModel.ListAvatar, TextInfoModel.txtAvatar);
                     }
                     var s = LDController.GetDevices2_Running();
-                    if (s.Count>0)
+                    if (s.Count > 0)
                     {
                         try
                         {
@@ -359,7 +360,7 @@ namespace InstargramCreator
             GlobalModel.MaxThreads = run;
             Properties.Settings.Default["numberThreads"] = run.ToString();
             Properties.Settings.Default.Save();
-          
+
         }
         private void numberRun_ValueChanged(object sender, EventArgs e)
         {
@@ -370,17 +371,17 @@ namespace InstargramCreator
         }
         private void btnPause_Click(object sender, EventArgs e)
         {
-            if (GlobalModel.IsStopAuto == true)
+            if (GlobalModel.ResultRun == true)
             {
                 btnPause.Text = "Pause";
 
-                GlobalModel.IsStopAuto = false;
+                GlobalModel.ResultRun = false;
             }
             else
             {
                 btnPause.Text = "Countine";
 
-                GlobalModel.IsStopAuto = true;
+                GlobalModel.ResultRun = true;
             }
         }
         private void radioPasswordCustomize_CheckedChanged(object sender, EventArgs e)
@@ -475,7 +476,6 @@ namespace InstargramCreator
                 }
                 else
                 {
-
                     btnAvatar.Enabled = false;
                     txtAvatar.Text = null;
                 }
@@ -698,7 +698,6 @@ namespace InstargramCreator
             Properties.Settings.Default.Save();
             TextInfoModel.txtLastName = txtLastName.Text;
         }
-
         private void btnLastname_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

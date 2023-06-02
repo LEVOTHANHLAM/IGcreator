@@ -10,8 +10,7 @@ namespace InstargramCreator.GetProcess
             try
             {
                 lock (GlobalModel.LockProxys)
-                {
-                    Log.Information("GetProxy " + GlobalModel.Proxys.Count);                
+                {            
                     if (GlobalModel.Proxys.Count == 0)
                     {
                         return null;
@@ -37,7 +36,6 @@ namespace InstargramCreator.GetProcess
             {
                 lock (GlobalModel.LockProxys)
                 {
-                    Log.Information("CheckProxy " + resultProxy.Count);
                     int indexProxy = resultProxy.Count - 1;
                     if (resultProxy[indexProxy].IsUsing == true)
                     {

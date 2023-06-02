@@ -5,7 +5,7 @@ namespace InstargramCreator.GetProcess
 {
     public class GetUserName
     {
-        public static  UserInfoModel GetUser()
+        public static UserInfoModel GetUser()
         {
             try
             {
@@ -17,15 +17,15 @@ namespace InstargramCreator.GetProcess
                     {
                         int indexUsertName = GlobalModel.Users.IndexOf(userInfoavailable.First());
                         GlobalModel.Users[indexUsertName].IsUsing = true;
-                        return GlobalModel.Users[indexUsertName];                      
-                        }
-                    }    
+                        return GlobalModel.Users[indexUsertName];
+                    }
                 }
+            }
             catch (Exception ex)
             {
-                Serilog.Log.Error(ex.ToString()); 
+                Serilog.Log.Error(ex.ToString());
             }
             return null;
-            }
         }
     }
+}

@@ -13,6 +13,5 @@
         public bool Status { get; set; }
         public string Proxy { get; set; }
         public string EmailForm { get; set; }
-       
     }
 }

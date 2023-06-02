@@ -195,7 +195,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BB6401F90BAB47019BDD6DB3F0D4C740"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C175B313B6DF428C91DC8C673C3F4BDF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C6B76367F9F64674B8F040752CF782FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -235,12 +247,6 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2767B01E805499DA4F84BB3D55FC0C3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
     }
     "Configurations"
     {
@@ -259,6 +265,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -275,6 +289,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -894,12 +916,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB6401F90BAB47019BDD6DB3F0D4C740"
+            {
+            "SourcePath" = "8:..\\InstargramCreator\\src\\InstargramCreator\\bin\\Debug\\net6.0-windows\\Setting\\Android\\DevicesAndroid.json"
+            "TargetName" = "8:DevicesAndroid.json"
+            "Tag" = "8:"
+            "Folder" = "8:_08373F7D72AA4C02A6ECD79ACA2AFAE7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C175B313B6DF428C91DC8C673C3F4BDF"
             {
             "SourcePath" = "8:..\\InstargramCreator\\src\\InstargramCreator\\bin\\Debug\\net6.0-windows\\images\\ScreenshotCreateNewAccountTB.png"
             "TargetName" = "8:ScreenshotCreateNewAccountTB.png"
             "Tag" = "8:"
             "Folder" = "8:_424FEFF553C246D2A285AB093F31E8EB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6B76367F9F64674B8F040752CF782FA"
+            {
+            "SourcePath" = "8:..\\InstargramCreator\\src\\InstargramCreator\\bin\\Debug\\net6.0-windows\\Setting\\Android\\Device.xml"
+            "TargetName" = "8:Device.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_08373F7D72AA4C02A6ECD79ACA2AFAE7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1081,6 +1143,28 @@
                     "Property" = "8:_BA4C03EFB5CB465885D1D628F2332ED8"
                         "Folders"
                         {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_27C1F3C8B8C54DE29DDE16ADF2E8B9FB"
+                    {
+                    "Name" = "8:Setting"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_677B12C38CEA4D9799E2C75295472359"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_08373F7D72AA4C02A6ECD79ACA2AFAE7"
+                            {
+                            "Name" = "8:Android"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_896975B7D9A54DFC8304C79708FA108C"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_424FEFF553C246D2A285AB093F31E8EB"
@@ -1659,7 +1743,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5374F61B55E54FE7B635A1CD37B87E4E"
             {
-            "SourcePath" = "8:..\\InstargramCreator\\src\\InstargramCreator\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\InstargramCreator\\src\\InstargramCreator\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F37B15D2E7284336A99B9C04553724B5"

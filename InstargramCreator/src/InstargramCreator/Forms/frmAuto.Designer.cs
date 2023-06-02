@@ -316,9 +316,9 @@
             // 
             // txtAvatar
             // 
-            txtAvatar.Location = new Point(116, 45);
+            txtAvatar.Location = new Point(103, 45);
             txtAvatar.Name = "txtAvatar";
-            txtAvatar.Size = new Size(272, 23);
+            txtAvatar.Size = new Size(284, 23);
             txtAvatar.TabIndex = 38;
             txtAvatar.TextChanged += txtAvatar_TextChanged;
             // 
@@ -524,7 +524,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(638, 615);
+            tabPage2.Size = new Size(638, 685);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Result";
             // 
@@ -547,7 +547,7 @@
             rtbResult.ForeColor = Color.Yellow;
             rtbResult.Location = new Point(3, 3);
             rtbResult.Name = "rtbResult";
-            rtbResult.Size = new Size(632, 609);
+            rtbResult.Size = new Size(632, 679);
             rtbResult.TabIndex = 0;
             rtbResult.Text = "";
             rtbResult.TextChanged += rtbResult_TextChanged;
@@ -601,9 +601,9 @@
             // 
             // txtBio
             // 
-            txtBio.Location = new Point(812, 729);
+            txtBio.Location = new Point(764, 724);
             txtBio.Name = "txtBio";
-            txtBio.Size = new Size(237, 23);
+            txtBio.Size = new Size(284, 23);
             txtBio.TabIndex = 60;
             txtBio.TextChanged += txtBio_TextChanged;
             // 
@@ -611,7 +611,7 @@
             // 
             btnBio.BackColor = SystemColors.ControlDarkDark;
             btnBio.ForeColor = SystemColors.ButtonHighlight;
-            btnBio.Location = new Point(1050, 724);
+            btnBio.Location = new Point(1054, 719);
             btnBio.Name = "btnBio";
             btnBio.Size = new Size(80, 30);
             btnBio.TabIndex = 59;
@@ -623,7 +623,7 @@
             // 
             cbBio.AutoSize = true;
             cbBio.ForeColor = SystemColors.ButtonHighlight;
-            cbBio.Location = new Point(707, 694);
+            cbBio.Location = new Point(664, 694);
             cbBio.Name = "cbBio";
             cbBio.Size = new Size(87, 19);
             cbBio.TabIndex = 58;
@@ -635,11 +635,11 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(702, 732);
+            label2.Location = new Point(671, 732);
             label2.Name = "label2";
-            label2.Size = new Size(85, 15);
+            label2.Size = new Size(58, 15);
             label2.TabIndex = 57;
-            label2.Text = "Image Folder  :";
+            label2.Text = "File Text  :";
             // 
             // menuStrip1
             // 
@@ -700,9 +700,9 @@
             // 
             // txtPost
             // 
-            txtPost.Location = new Point(115, 111);
+            txtPost.Location = new Point(103, 113);
             txtPost.Name = "txtPost";
-            txtPost.Size = new Size(273, 23);
+            txtPost.Size = new Size(284, 23);
             txtPost.TabIndex = 66;
             txtPost.TextChanged += txtPost_TextChanged;
             // 

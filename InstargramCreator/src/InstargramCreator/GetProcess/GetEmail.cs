@@ -12,7 +12,6 @@ namespace InstargramCreator.GetProcess
             {
                 lock (GlobalModel.LockEmails)
                 {
-                    Log.Information("CheckProxy " + mailfile.Count);
                     mailfile = mailfile.Where(x => x.Status != true).ToList();
                     if (mailfile.Count > 0)
                     {
@@ -31,7 +30,6 @@ namespace InstargramCreator.GetProcess
             {
                 lock (GlobalModel.LockEmails)
                 {
-                    Log.Information("GetMail " + mailfile.Count);
                     if (mailfile.Count == 0) return null;
                     List<MailInfoModel> mailavailable = mailfile.Where(x => x.IsUsing == false).ToList();
                     if (mailavailable.Count > 0)
@@ -44,7 +42,7 @@ namespace InstargramCreator.GetProcess
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                Log.Error(ex, ex.Message);
             }
             return null;
         }   

@@ -193,6 +193,11 @@ namespace LDPlayerNTC
         /// <param name="NameOrIndex"></param>
         public static void ReBoot(string param, string NameOrIndex)
         {
+            Change_Property();
+            Changeime();
+            ChangeMac();
+            ChangeSdt();
+            Change_Property(param, NameOrIndex, "--manufacturer " + Manu[number1] + " --model " + model1[number1] + " --pnumber " + SDT + " --imei " + ime + " --imsi " + ime + " --mac " + maclen);
             ExecuteLD(string.Format("reboot --{0} {1}", param, NameOrIndex));
         }
 

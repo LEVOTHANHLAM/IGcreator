@@ -1,5 +1,6 @@
 ﻿using InstargramCreator.Entities;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 
 namespace InstargramCreator.Repositories
 {
@@ -45,6 +46,12 @@ namespace InstargramCreator.Repositories
             }
             _dbContext.SaveChanges();
         }
+
+        public Accounts GetAccountByName(string name)
+        {
+           return  _dbContext.Accounts.Where(s => s.UserName== name).FirstOrDefault();
+        }
+
         public List<Accounts> GetAll()
         {
             return _dbContext.Accounts.ToList();

@@ -27,7 +27,6 @@ namespace InstargramCreator.Input
             try
             {
                 var proxyfile = File.ReadAllLines(filePath);
-                Log.Error("AddFileproxy " + filePath + " \n" + proxyfile.Length);
                 GlobalModel.Proxys.Clear();
                 for (int i = 0; i < proxyfile.Length; i++)
                 {

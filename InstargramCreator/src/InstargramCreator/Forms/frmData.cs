@@ -5,7 +5,7 @@ using Serilog;
 namespace InstargramCreator
 {
     public partial class frmData : Form
-    {     
+    {
         private readonly IAccountRepository _accountRepository;
         private const int WS_SYSMENU = 0x80000;
         List<Guid> listId = new List<Guid>();
@@ -20,8 +20,8 @@ namespace InstargramCreator
         }
         public frmData(IAccountRepository accountRepository)
         {
-            InitializeComponent();          
-            _accountRepository = accountRepository;            
+            InitializeComponent();
+            _accountRepository = accountRepository;
         }
         private void btnRefesh_Click(object sender, EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace InstargramCreator
         private void btnexit_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }      
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -44,11 +44,11 @@ namespace InstargramCreator
             }
         }
         private void frmData_Load(object sender, EventArgs e)
-        {            
+        {
             Load_Account();
         }
         private void Load_Account()
-        {        
+        {
             try
             {
                 var list = _accountRepository.GetAll();
@@ -56,7 +56,7 @@ namespace InstargramCreator
                 dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
             catch (Exception ex)
-            {             
+            {
                 Log.Error("Load_Account");
                 Log.Error(ex, ex.Message);
             }
@@ -67,14 +67,14 @@ namespace InstargramCreator
             export.ExportTxt();
         }
         private void btnDelete_Click(object sender, EventArgs e)
-        {          
-                _accountRepository.DeleteRange(listId);
-                Load_Account();                 
+        {
+            _accountRepository.DeleteRange(listId);
+            Load_Account();
         }
         private void btnDeleteAll_Click(object sender, EventArgs e)
-        {         
-                _accountRepository.DeleteAll();
-                Load_Account();            
+        {
+            _accountRepository.DeleteAll();
+            Load_Account();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -36,7 +36,6 @@ namespace InstargramCreator.Input
         {
             try
             {
-                Log.Information("VerifyMail " + toEmail + ":" + pass + ":" + imap + ":" + port);
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(imap) && port != null)
                 {
                     using (var client = new ImapClient())
@@ -49,7 +48,7 @@ namespace InstargramCreator.Input
                         for (int i = index; i > 0; i--)
                         {
                             var message = inbox.GetMessage(i);
-                            if (message.To.ToString() == toEmail&& message.From[0].Name == fromEmail)
+                            if (message.To.ToString() == toEmail.ToLower()&& message.From[0].Name == fromEmail)
                             {
                                string body =  message.Subject;
                                 string[] s = body.Split(' ');
@@ -60,17 +59,17 @@ namespace InstargramCreator.Input
                                 }
                                 else
                                 {
-                                    Log.Error($" {macode} is not valid integer type");
+                                    Log.Error(email+ " Macode "+ macode);
                                 }
                                 client.Disconnect(true);
                             }
                         }
-                       
                     }
                 }
             }
             catch (Exception ex)
             {
+                Log.Error("VerifyMail "+email);
                 Log.Error(ex, ex.Message);
             }
             return null;

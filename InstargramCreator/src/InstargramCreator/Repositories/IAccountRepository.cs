@@ -11,5 +11,6 @@ namespace InstargramCreator.Repositories
         void Delete(Guid id);
         void DeleteRange(List<Guid> deleteList);
         void DeleteAll();
+        Accounts GetAccountByName(string name);
     }
 }

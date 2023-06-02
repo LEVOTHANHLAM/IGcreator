@@ -11,7 +11,6 @@ namespace InstargramCreator.GetProcess
             {
                 lock (GlobalModel.LockAvatar)
                 {
-                    Log.Information("GetImgAvatar " + GlobalModel.Avatar.Count);
                     if (GlobalModel.Avatar.Count == 0) return null;
                     List<AvatarInfoModel> avartaravailable = GlobalModel.Avatar.Where(x => x.IsRunning == false).ToList();
                     if (avartaravailable.Count > 0)

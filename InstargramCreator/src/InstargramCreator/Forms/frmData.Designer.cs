@@ -28,202 +28,193 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmData));
-            this.btnexit = new System.Windows.Forms.Button();
-            this.btnDeleteAll = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnRefesh = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ChooseCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
-            this.SuspendLayout();
+            btnexit = new Button();
+            btnDeleteAll = new Button();
+            btnExport = new Button();
+            btnDelete = new Button();
+            btnRefesh = new Button();
+            dataGridView1 = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            accountsBindingSource = new BindingSource(components);
+            ChooseCol = new DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)accountsBindingSource).BeginInit();
+            SuspendLayout();
             // 
             // btnexit
             // 
-            this.btnexit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnexit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnexit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnexit.Location = new System.Drawing.Point(858, 102);
-            this.btnexit.Name = "btnexit";
-            this.btnexit.Size = new System.Drawing.Size(106, 32);
-            this.btnexit.TabIndex = 1;
-            this.btnexit.Text = "Exit";
-            this.btnexit.UseVisualStyleBackColor = false;
-            this.btnexit.Click += new System.EventHandler(this.btnexit_Click);
+            btnexit.BackColor = Color.FromArgb(50, 50, 50);
+            btnexit.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnexit.ForeColor = SystemColors.ButtonHighlight;
+            btnexit.Location = new Point(859, 12);
+            btnexit.Name = "btnexit";
+            btnexit.Size = new Size(106, 32);
+            btnexit.TabIndex = 1;
+            btnexit.Text = "Exit";
+            btnexit.UseVisualStyleBackColor = false;
+            btnexit.Click += btnexit_Click;
             // 
             // btnDeleteAll
             // 
-            this.btnDeleteAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnDeleteAll.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDeleteAll.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDeleteAll.Location = new System.Drawing.Point(743, 102);
-            this.btnDeleteAll.Name = "btnDeleteAll";
-            this.btnDeleteAll.Size = new System.Drawing.Size(109, 31);
-            this.btnDeleteAll.TabIndex = 2;
-            this.btnDeleteAll.Text = "Delete All ";
-            this.btnDeleteAll.UseVisualStyleBackColor = false;
-            this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
+            btnDeleteAll.BackColor = Color.FromArgb(50, 50, 50);
+            btnDeleteAll.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeleteAll.ForeColor = SystemColors.ButtonHighlight;
+            btnDeleteAll.Location = new Point(744, 12);
+            btnDeleteAll.Name = "btnDeleteAll";
+            btnDeleteAll.Size = new Size(109, 31);
+            btnDeleteAll.TabIndex = 2;
+            btnDeleteAll.Text = "Delete All ";
+            btnDeleteAll.UseVisualStyleBackColor = false;
+            btnDeleteAll.Click += btnDeleteAll_Click;
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnExport.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExport.Location = new System.Drawing.Point(518, 102);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(106, 31);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Export File";
-            this.btnExport.UseVisualStyleBackColor = false;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            btnExport.BackColor = Color.FromArgb(50, 50, 50);
+            btnExport.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExport.ForeColor = SystemColors.ButtonHighlight;
+            btnExport.Location = new Point(519, 12);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(106, 31);
+            btnExport.TabIndex = 3;
+            btnExport.Text = "Export File";
+            btnExport.UseVisualStyleBackColor = false;
+            btnExport.Click += btnExport_Click;
             // 
             // btnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDelete.Location = new System.Drawing.Point(632, 102);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(106, 31);
-            this.btnDelete.TabIndex = 4;
-            this.btnDelete.Text = "Delete Items";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            btnDelete.BackColor = Color.FromArgb(50, 50, 50);
+            btnDelete.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDelete.ForeColor = SystemColors.ButtonHighlight;
+            btnDelete.Location = new Point(633, 12);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(106, 31);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "Delete Items";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnRefesh
             // 
-            this.btnRefesh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnRefesh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnRefesh.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRefesh.Location = new System.Drawing.Point(406, 102);
-            this.btnRefesh.Name = "btnRefesh";
-            this.btnRefesh.Size = new System.Drawing.Size(106, 31);
-            this.btnRefesh.TabIndex = 6;
-            this.btnRefesh.Text = "Refresh";
-            this.btnRefesh.UseVisualStyleBackColor = false;
-            this.btnRefesh.Click += new System.EventHandler(this.btnRefesh_Click);
+            btnRefesh.BackColor = Color.FromArgb(50, 50, 50);
+            btnRefesh.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnRefesh.ForeColor = SystemColors.ButtonHighlight;
+            btnRefesh.Location = new Point(407, 12);
+            btnRefesh.Name = "btnRefesh";
+            btnRefesh.Size = new Size(106, 31);
+            btnRefesh.TabIndex = 6;
+            btnRefesh.Text = "Refresh";
+            btnRefesh.UseVisualStyleBackColor = false;
+            btnRefesh.Click += btnRefesh_Click;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewCheckBoxColumn1,
-            this.emailDataGridViewTextBoxColumn,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-            this.dataGridView1.DataSource = this.accountsBindingSource;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 139);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(964, 580);
-            this.dataGridView1.StandardTab = true;
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewCheckBoxColumn1, emailDataGridViewTextBoxColumn, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            dataGridView1.DataSource = accountsBindingSource;
+            dataGridView1.GridColor = SystemColors.ActiveCaptionText;
+            dataGridView1.Location = new Point(1, 50);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(964, 669);
+            dataGridView1.StandardTab = true;
+            dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
+            dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn1.HeaderText = "Id";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Visible = false;
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Select";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            dataGridViewCheckBoxColumn1.HeaderText = "Select";
+            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             // 
             // emailDataGridViewTextBoxColumn
             // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Password";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Password";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.DataPropertyName = "Password";
+            dataGridViewTextBoxColumn2.HeaderText = "Password";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "UserName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "UserName";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.DataPropertyName = "UserName";
+            dataGridViewTextBoxColumn3.HeaderText = "UserName";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Proxy";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Proxy";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.DataPropertyName = "Proxy";
+            dataGridViewTextBoxColumn4.HeaderText = "Proxy";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "FullName";
-            this.dataGridViewTextBoxColumn5.HeaderText = "FullName";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.DataPropertyName = "FullName";
+            dataGridViewTextBoxColumn5.HeaderText = "FullName";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "CreateDate";
-            this.dataGridViewTextBoxColumn6.HeaderText = "CreateDate";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.DataPropertyName = "CreateDate";
+            dataGridViewTextBoxColumn6.HeaderText = "CreateDate";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // accountsBindingSource
             // 
-            this.accountsBindingSource.DataSource = typeof(InstargramCreator.Entities.Accounts);
+            accountsBindingSource.DataSource = typeof(Entities.Accounts);
             // 
             // ChooseCol
             // 
-            this.ChooseCol.Name = "ChooseCol";
+            ChooseCol.Name = "ChooseCol";
             // 
             // frmData
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(968, 709);
-            this.Controls.Add(this.btnRefesh);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.btnDeleteAll);
-            this.Controls.Add(this.btnexit);
-            this.Controls.Add(this.dataGridView1);
-            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmData";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "InstagramCreator";
-            this.Load += new System.EventHandler(this.frmData_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.FromArgb(50, 50, 50);
+            ClientSize = new Size(968, 709);
+            Controls.Add(btnRefesh);
+            Controls.Add(btnDelete);
+            Controls.Add(btnExport);
+            Controls.Add(btnDeleteAll);
+            Controls.Add(btnexit);
+            Controls.Add(dataGridView1);
+            ForeColor = SystemColors.ActiveCaptionText;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmData";
+            SizeGripStyle = SizeGripStyle.Hide;
+            Text = "InstagramCreator";
+            Load += frmData_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)accountsBindingSource).EndInit();
+            ResumeLayout(false);
         }
 
 
@@ -245,7 +236,7 @@
         private DataGridViewTextBoxColumn hasAvatarDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn hasBioDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn createDateDataGridViewTextBoxColumn;
-       // private Label label1;
+        // private Label label1;
         //private DataGridViewCheckBoxColumn statusDataGridViewTextBoxColumn;
         //private DataGridViewCheckBoxColumn hasAvatarDataGridViewTextBoxColumn;
         //private DataGridViewCheckBoxColumn hasBioDataGridViewTextBoxColumn;

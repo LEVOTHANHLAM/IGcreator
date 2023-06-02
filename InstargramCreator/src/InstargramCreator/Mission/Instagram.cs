@@ -6,6 +6,7 @@ using InstargramCreator.MultiTask;
 using InstargramCreator.Repositories;
 using LDPlayerNTC;
 using Serilog;
+using System.Linq;
 
 namespace InstargramCreator.Mission
 {
@@ -23,7 +24,6 @@ namespace InstargramCreator.Mission
             try
             {
                 LDController.ClearCaches("index", Index.ToString(), packageInstagram);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Clear Caches Instagram ");
                 LDController.Delay();
                 LDController.RunApp("index", Index.ToString(), packageInstagram);
                 GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Run App Instagram ");
@@ -35,57 +35,63 @@ namespace InstargramCreator.Mission
                     {
                         mail.Proxy = "";
                     }
-                    Accounts accounts = new Accounts();
-                    accounts.Id = Guid.NewGuid();
-                    if (TextInfoModel.cbCatch == true)
-                    {
-                        accounts.Email = mail.EmailForm;
-                    }
-                    else
-                    {
-                        accounts.Email = mail.Email;
-                    }
-                    accounts.Password = mail.PassInstargram;
-                    accounts.UserName = mail.User;
-                    accounts.Proxy = mail.Proxy;
-                    accounts.FullName = mail.FullName;
-                    accounts.CreateDate = DateTime.Now;
-                    _accountRepository.Add(accounts);
                     GlobalModel.rtbResultQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + mail.Email + "," + mail.PassInstargram + "," + mail.User + "," + mail.Proxy + "_" + mail.FullName);
-                    GlobalModel.createAccount++;
-                    if (RadioInfoModel.radioNoProxy == false)
+                    var getAccount = _accountRepository.GetAccountByName(mail.User);
+                    if (getAccount == null && !string.IsNullOrEmpty(mail.FullName) && !string.IsNullOrEmpty(mail.User) && !string.IsNullOrEmpty(mail.PassInstargram))
                     {
-                        GlobalModel.ListProxy.Add(mail.Proxy);
+                        Accounts accounts = new Accounts();
+                        accounts.Id = Guid.NewGuid();
+
+                        if (TextInfoModel.cbCatch == true)
+                        {
+                            accounts.Email = mail.EmailForm;
+                        }
+                        else
+                        {
+                            accounts.Email = mail.Email;
+                        }
+                        accounts.Password = mail.PassInstargram;
+                        accounts.UserName = mail.User;
+                        accounts.Proxy = mail.Proxy;
+                        accounts.FullName = mail.FullName;
+                        accounts.CreateDate = DateTime.Now;
+                        _accountRepository.Add(accounts);
+
+                        GlobalModel.createAccount++;
+                        if (RadioInfoModel.radioNoProxy == false)
+                        {
+                            GlobalModel.ListProxy.Add(mail.Proxy);
+                        }
+                        GlobalModel.ListEmail.Add(mail.Email);
+                        if (RadioInfoModel.radioFullnameCustomize == true)
+                        {
+                            GlobalModel.ListFullName.Add(mail.FullName);
+                        }
+                        if (RadioInfoModel.radioUserCustomize == true)
+                        {
+                            GlobalModel.ListUserName.Add(mail.User);
+                        }
+                        if (RadioInfoModel.cbAvatar == true)
+                        {
+                            UploadAvartar(Index, avatar);
+                        }
+                        if (RadioInfoModel.cbPost == true)
+                        {
+                            UploadPost(Index, post);
+                        }
+                        if (RadioInfoModel.cbBio == true)
+                        {
+                            UploadBio(Index, bio);
+                        }
+                        LDController.Key("index", Index.ToString(), ADBKeyEvent.KEYCODE_HOME);
                     }
-                    GlobalModel.ListEmail.Add(mail.Email);
-                    if (RadioInfoModel.radioFullnameCustomize == true)
-                    {
-                        GlobalModel.ListFullName.Add(mail.FullName);
-                    }
-                    if (RadioInfoModel.radioUserCustomize == true)
-                    {
-                        GlobalModel.ListUserName.Add(mail.User);
-                    }
-                    if (RadioInfoModel.cbAvatar == true)
-                    {
-                        UploadAvartar(Index, avatar);
-                    }
-                    if (RadioInfoModel.cbPost == true)
-                    {
-                        UploadPost(Index, post);
-                    }
-                    if (RadioInfoModel.cbBio == true)
-                    {
-                        UploadBio(Index, bio);
-                    }
-                    LDController.Key("index", Index.ToString(), ADBKeyEvent.KEYCODE_HOME);
                 }
             }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Message);
-                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") +"Error " + " LDPlayer  " + Index + " " + ex.Message);
-                LDController.Close("index", Index.ToString());
+                GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + " LDPlayer  " + Index + " " + ex.Message);
+                return;
             }
         }
         private async void AutoInstagram(int Index, MailInfoModel mail, FullNameInfoModel fullNameInfo, UserInfoModel userInfo)
@@ -100,11 +106,11 @@ namespace InstargramCreator.Mission
                     LDController.Delay();
                     if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.Next) == true)
                     {
-                        if(TextInfoModel.cbCatch == true)
+                        if (TextInfoModel.cbCatch == true)
                         {
                             ReadFileJson readFileJson = new ReadFileJson();
                             var firstName = readFileJson.GetStringFileJson(GlobalModel.PathUserNameJsoin);
-                            mail.EmailForm = firstName + RandomStrings.RandomAllString(RandomStrings.RandomNumber(4, 10), RandomStrings.Numeric + RandomStrings.LowerCase)+mail.Email;
+                            mail.EmailForm = firstName + RandomStrings.RandomAllString(RandomStrings.RandomNumber(4, 10), RandomStrings.Numeric + RandomStrings.LowerCase) + mail.Email;
                             LDController.InputText("index", Index.ToString(), mail.EmailForm);
                             GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Import Email: " + mail.EmailForm);
                             Log.Information("LDPlayer " + Index + " Import Email: " + mail.EmailForm);
@@ -120,8 +126,7 @@ namespace InstargramCreator.Mission
                         LDController.Delay();
                         if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.ScreenshotCreateNewAccountTB) == true)
                         {
-                            GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Unable to continue because this Email has been registered before ");
-                            LDController.Close("index", Index.ToString());
+                            GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "LDPlayer " + Index + " Unable to continue because this Email has been registered before ");
                             return;
                         }
                         if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.Next) == true)
@@ -129,8 +134,13 @@ namespace InstargramCreator.Mission
                             if (TextInfoModel.cbCatch == true)
                             {
                                 Log.Information("LDPlayer " + Index + " Import Email: " + mail.EmailForm);
-                                LDController.Delay(40,60);
+                                LDController.Delay(40, 60);
                                 string otp = MailKits.VerifyMail(mail.Email, mail.PassMail, mail.Imap, mail.PortImap, mail.EmailForm, "Instagram");
+                                if (otp == null)
+                                {
+                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "LDPlayer " + Index + " No otp");
+                                    return;
+                                }
                                 LDController.Delay();
                                 LDController.InputText("index", Index.ToString(), otp);
                                 LDController.Delay();
@@ -139,6 +149,11 @@ namespace InstargramCreator.Mission
                             else
                             {
                                 string otp = MailKits.VerifyMail(mail.Email, mail.PassMail, mail.Imap, mail.PortImap, mail.Email, "Instagram");
+                                if (otp == null)
+                                {
+                                    GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "LDPlayer " + Index + " No otp");
+                                    return;
+                                }
                                 LDController.Delay();
                                 LDController.InputText("index", Index.ToString(), otp);
                                 LDController.Delay();
@@ -155,16 +170,17 @@ namespace InstargramCreator.Mission
                                 ReadFileJson readFileJson = new ReadFileJson();
                                 fullNameInfo.FirstName = readFileJson.GetStringsFileTxt(TextInfoModel.txtFullname);
                                 fullNameInfo.LastName = readFileJson.GetStringsFileTxt(TextInfoModel.txtLastName);
-                                mail.FullName = fullNameInfo.FirstName +"%s" +fullNameInfo.LastName;
+                                mail.FullName = fullNameInfo.FirstName + "%s" + fullNameInfo.LastName;
                             }
-                            else if(RadioInfoModel.radioFullnameRandom == true)
+                            else if (RadioInfoModel.radioFullnameRandom == true)
                             {
                                 ReadFileJson readFileJson = new ReadFileJson();
                                 fullNameInfo.FirstName = readFileJson.GetStringFileJson(GlobalModel.PathFistNameJsoin);
                                 fullNameInfo.LastName = readFileJson.GetStringFileJson(GlobalModel.PathLastNameJsoin);
                                 string fullName = fullNameInfo.FirstName + "%s" + fullNameInfo.LastName;
                                 mail.FullName = fullName;
-                            }else if (RadioInfoModel.radioRandomVN == true)
+                            }
+                            else if (RadioInfoModel.radioRandomVN == true)
                             {
                                 ReadFileJson readFileJson = new ReadFileJson();
                                 fullNameInfo.FirstName = readFileJson.GetStringsFileTxt(GlobalModel.PathFullnameVNJsion);
@@ -173,10 +189,11 @@ namespace InstargramCreator.Mission
                             }
                             LDController.TapByPercent("index", Index.ToString(), 10.3, 19.8);
                             LDController.InputText("index", Index.ToString(), "B");
-                            LDController.InputText("index", Index.ToString(),string.Format("'{0}'", mail.FullName));
+                            LDController.InputText("index", Index.ToString(), string.Format("'{0}'", mail.FullName));
                             LDController.TapByPercent("index", Index.ToString(), 9.4, 20.8);
-                            LDController.Key("index",Index.ToString(),ADBKeyEvent.KEYCODE_DEL);
+                            LDController.Key("index", Index.ToString(), ADBKeyEvent.KEYCODE_DEL);
                             LDController.Delay();
+                            mail.FullName = fullNameInfo.FirstName + " " + fullNameInfo.LastName;
                             GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "LDPlayer " + Index + " Import FullName: " + mail.FullName);
                             if (RadioInfoModel.radioPasswordCustomize == true)
                             {
@@ -256,13 +273,11 @@ namespace InstargramCreator.Mission
                                     LDController.Delay(15, 20);
                                     if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.Continue) == true)
                                     {
-                                        LDController.Close("index", Index.ToString());
                                         GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "LDPlayer " + Index + " Unable to continue ");
                                         return;
                                     }
                                     else if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.ScreenshotTryAgainLater) == true)
                                     {
-                                        LDController.Close("index", Index.ToString());
                                         GlobalModel.rtbLogsQueue.Enqueue(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss\t") + "Error " + "LDPlayer " + Index + " Unable to continue ");
                                         return;
                                     }
@@ -290,6 +305,10 @@ namespace InstargramCreator.Mission
                         }
                     }
                 }
+            }
+            else
+            {
+                return;
             }
         }
         private void UploadBio(int Index, BioInfoModel bio)
@@ -332,7 +351,7 @@ namespace InstargramCreator.Mission
                 LDController.RunApp("index", Index.ToString(), packageInstagram);
                 LDController.Delay();
                 if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.Posts, 40000) == true)
-                {                  
+                {
                     LDController.FindImageTapEditProfile("index", Index.ToString(), ImagesInfoModel.Posts);
                     LDController.Delay();
                     if (LDController.FindImage("index", Index.ToString(), ImagesInfoModel.ChangePhoto, 40000) == true)
@@ -403,4 +422,4 @@ namespace InstargramCreator.Mission
             }
         }
     }
-}       
+}

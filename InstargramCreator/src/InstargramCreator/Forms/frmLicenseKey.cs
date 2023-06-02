@@ -8,19 +8,23 @@ using System.Diagnostics;
 using System;
 using InstargramCreator.Input;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using InstargramCreator.Entities;
+using InstargramCreator.Repositories;
 
 namespace InstargramCreator
 {
     public partial class frmLicenseKey : Form
     {
+        private readonly IAccountRepository _accountRepository;
         private readonly frmAuto _frmAuto;
-        public frmLicenseKey(frmAuto frmAuto)
+        public frmLicenseKey(frmAuto frmAuto, IAccountRepository accountRepository)
         {
             InitializeComponent();
             InitializeSavedValues();
             _frmAuto = frmAuto;
+            _accountRepository = accountRepository;
         }
-        private const int WS_SYSMENU = 0x80000; 
+        private const int WS_SYSMENU = 0x80000;
         protected override CreateParams CreateParams
         {
             get
@@ -29,7 +33,7 @@ namespace InstargramCreator
                 cp.Style &= ~WS_SYSMENU;
                 return cp;
             }
-        }     
+        }
         private void InitializeSavedValues()
         {
             txtLicenkey.Text = (string)Properties.Settings.Default["txtLicenkey"];
@@ -40,32 +44,34 @@ namespace InstargramCreator
         {
             try
             {
-                //HttpHelper httpHelper = new HttpHelper();
-                //string hardwareId = httpHelper.GetHardwareId();
-                //Constant.licenseKey = txtLicenkey.Text.Trim();
-                //var softwareId = Constant.SoftwareId;
-                //var checkLicenseResult = await httpHelper.CheckLicense(Constant.licenseKey, hardwareId, softwareId);
-                //if (checkLicenseResult.Data is true)
-                //{
-                LDController.pathLDConsole = txtPath.Text + "\\ldconsole.exe";
-                LDController.pathADB = txtPath.Text + "\\adb.exe";
-                GlobalModel.SourcePath = txtPath.Text;
-                GlobalModel.MultiPlayerPath = txtPath.Text + "\\dnmultiplayer.exe";
-                CreateFiles.CreateFile();
-                _frmAuto.Show();
-                this.Hide();
-                //}
-                //else
-                //{
-                //    MessageBox.Show(checkLicenseResult.Message.ToString());
-                //    var ps = new ProcessStartInfo("https://qnibot.com/")
-                //    {
-                //        UseShellExecute = true,
-                //        Verb = "open"
-                //    };
-                //    Process.Start(ps);
-                //    Environment.Exit(Environment.ExitCode);
-                //}
+                HttpHelper httpHelper = new HttpHelper();
+                string hardwareId = httpHelper.GetHardwareId();
+                Constant.licenseKey = txtLicenkey.Text.Trim();
+                var softwareId = Constant.SoftwareId;
+                if (hardwareId != null && Constant.licenseKey != null && softwareId != null)
+                {
+                    var checkLicenseResult = await httpHelper.CheckLicense(Constant.licenseKey, hardwareId, softwareId);
+                    if (checkLicenseResult.Data is true)
+                    {
+                        LDController.pathLDConsole = txtPath.Text + "\\ldconsole.exe";
+                        LDController.pathADB = txtPath.Text + "\\adb.exe";
+                        GlobalModel.SourcePath = txtPath.Text;
+                        GlobalModel.MultiPlayerPath = txtPath.Text + "\\dnmultiplayer.exe";
+                        CreateFiles.CreateFile();
+                        _frmAuto.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        var ps = new ProcessStartInfo("https://qnibot.com/")
+                        {
+                            UseShellExecute = true,
+                            Verb = "open"
+                        };
+                        Process.Start(ps);
+                        Environment.Exit(Environment.ExitCode);
+                    }
+                }
             }
             catch (Exception ex)
             {
